@@ -14,6 +14,6 @@ public class Main {
         for (int i = 0; i < student1.getCourseCount(); i++) {
             System.out.println("- " + student1.disciplines[i]);
         }
-
+ 
     }
 }
