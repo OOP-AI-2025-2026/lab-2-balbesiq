@@ -3,44 +3,70 @@ package ua.opnu;
 
 public class TimeSpan {
 
-    // TODO: add class fields
+    public int hours;
+    public int minutes;
 
     TimeSpan(int hours, int minutes) {
-        // TODO: write constructor body
+        if (hours < 0 || minutes < 0 || minutes > 59) {
+            this.hours = 0;
+            this.minutes = 0;
+        } else {
+            this.hours = hours;
+            this.minutes = minutes;
+        }
     }
 
     int getHours() {
-        return 0;
+        return hours;
     }
 
     int getMinutes() {
-        // TODO: write method body
-        return 0;
+        return minutes;
     }
 
     void add(int hours, int minutes) {
-        // TODO: write method body
+
+        if (hours < 0 || minutes < 0 || minutes > 59) {
+            return;
+        }
+
+        this.hours+=hours;
+        this.minutes+=minutes;
+
+        if (this.minutes>=60) {
+            this.hours+=this.minutes/60;
+            this.minutes%=60;
+        }
     }
 
     void addTimeSpan(TimeSpan timespan) {
-        // TODO: write method body
+        add(timespan.getHours(), timespan.getMinutes());
     }
 
     double getTotalHours() {
-        // TODO: write method body
-        return 0;
+        return hours+minutes/60.0;
     }
 
     int getTotalMinutes() {
-        // TODO: write method body
-        return 0;
+        return minutes+hours*60;
     }
 
     void subtract(TimeSpan span) {
-        // TODO: write method body
+        int result = getTotalMinutes()-span.getTotalMinutes();
+        if (result < 0)
+            return;
+        hours=result/60;
+        minutes=result%60;
     }
 
     void scale(int factor) {
-        // TODO: write method body
+        if(factor<=0)
+            return;
+        this.hours*=factor;
+        this.minutes*=factor;
+        if (this.minutes >= 60) {
+            this.hours += this.minutes / 60;
+            this.minutes %= 60;
+        }
     }
 }
